@@ -12,13 +12,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200..900&display=swap" rel="stylesheet" />
     <style>
+      :root {
+        --bg-color: #021c30;
+        --text-color: #f7f7f7;
+      }
+      body:has(input:checked) {
+        --bg-color: #f7f7f7;
+        --text-color: #021c30;
+      }
       body {
         display: flex;
-        background-color: #021c30;
-        color: #f7f7f7;
+        background-color: var(--bg-color);
+        color: var(--text-color);
         font-family: "Inconsolata", monospace;
         height: 100dvh;
         align-items: center;
+        transition: background-color 0.3s, color 0.3s;
       }
       main {
         display: flex;
@@ -43,14 +52,30 @@
         margin-bottom: 0.2rem;
       }
       li::marker {
-        content: '➤ ';
+        content: "➤ ";
       }
       a {
-        color: #f7f7f7;
+        color: var(--text-color);
         text-decoration: none;
       }
       a:hover {
         text-decoration: underline;
+      }
+      #theme-toggle {
+        font-size: 1.5rem;
+        position: fixed;
+        right: 1rem;
+        top: 1rem;
+      }
+      #theme-toggle input {
+        display: none;
+      }
+      #theme-toggle span::before {
+        content: '🔆';
+        cursor: pointer;
+      }
+      #theme-toggle input:checked + span::before {
+        content: '⏾';
       }
     </style>
   </head>
@@ -64,5 +89,9 @@
         <li><a href="mailto:hi@vol.ar">Get in touch!</a></li>
       </ul>
     </main>
+    <label id="theme-toggle">
+      <input type="checkbox" role="switch">
+      <span></span>
+    </label>
   </body>
 </html>
